@@ -13,10 +13,9 @@ var (
 
 // Root command
 var rootCmd = &cobra.Command{
-	Use:   "awe",
-	Short: "AWE - Your awesome CLI tool",
-	Long: `AWE is a encryption tool used for security testing developed by AVACX.
-	`,
+	Use:     "awe [flags] <value>", // แก้ตรงนี้
+	Short:   "AWE - Your awesome CLI tool",
+	Long:    `AWE is a encryption tool used for security testing developed by AVACX.`,
 	Version: version,
 }
 
@@ -43,11 +42,28 @@ func init() {
 	// ปิดการใช้งานคำสั่ง completion เริ่มต้น
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
 
+	// กำหนดข้อความ Usage Template แบบกำหนดเอง (ถ้าต้องการ)
+	rootCmd.SetUsageTemplate(`Usage:
+  {{.UseLine}}{{if .HasAvailableSubCommands}}
+
+Available commands:{{range .Commands}}{{if (or .IsAvailableCommand (eq .Name "help"))}}
+  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}{{if .HasAvailableLocalFlags}}
+
+Flags:
+{{.LocalFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasAvailableInheritedFlags}}
+
+Flags:
+{{.InheritedFlags.FlagUsages | trimTrailingWhitespaces}}{{end}}{{if .HasAvailableSubCommands}}
+
+Use "{{.CommandPath}} [-h] --help" to see help for each command{{end}}
+`)
+
 	// เพิ่ม subcommands เข้าไปใน root command
 	rootCmd.AddCommand(startCmd)
 
 	// Global flags
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Enable debug mode")
+	rootCmd.PersistentFlags().BoolP("connect", "c", false, "Connect to AWE Network")
 }
 
 func main() {
