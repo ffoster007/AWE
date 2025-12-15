@@ -12,7 +12,7 @@ all: build
 # Build โปรแกรม
 build:
 	@echo "Building $(BINARY_NAME)..."
-	go build -o $(BINARY_NAME) .
+	go build -o $(BINARY_NAME) ./cli
 	@echo "Build complete!"
 
 # ติดตั้งโปรแกรม
