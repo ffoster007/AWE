@@ -23,7 +23,7 @@ var rootCmd = &cobra.Command{
 var startCmd = &cobra.Command{
 	Use:   "start",
 	Short: "Start the server",
-	Long:  `Start the server with specified configuration`,
+	Long:  `Start the server with specified configuration.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		port, _ := cmd.Flags().GetInt("port")
 		host, _ := cmd.Flags().GetString("host")

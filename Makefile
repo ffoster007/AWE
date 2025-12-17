@@ -28,23 +28,3 @@ uninstall:
 	@echo "Uninstalling $(BINARY_NAME)..."
 	@rm -f $(INSTALL_PATH)/$(BINARY_NAME)
 	@echo "Uninstall complete!"
-
-# ลบไฟล์ที่ build
-clean:
-	@echo "Cleaning up..."
-	@rm -f $(BINARY_NAME)
-	@echo "Clean complete!"
-
-# รันโปรแกรมโดยตรง (สำหรับทดสอบ)
-run: build
-	@./$(BINARY_NAME)
-
-# แสดงคำสั่งที่ใช้ได้
-help:
-	@echo "Available targets:"
-	@echo "  make build      - Build the project"
-	@echo "  make install    - Build and install to GOPATH/bin"
-	@echo "  make uninstall  - Remove installed binary"
-	@echo "  make clean      - Remove built binary"
-	@echo "  make run        - Build and run locally"
-	@echo "  make help       - Show this help message"
