@@ -19,44 +19,7 @@ var RootCmd = &cobra.Command{
 	Version: Version,
 }
 
-// StartCmd คือ command สำหรับ start server
-var StartCmd = &cobra.Command{
-	Use:   "start",
-	Short: "Start the server",
-	Long:  `Start the server with specified configuration`,
-	Run: func(cmd *cobra.Command, args []string) {
-		port, _ := cmd.Flags().GetInt("port")
-		host, _ := cmd.Flags().GetString("host")
-		verbose, _ := cmd.Flags().GetBool("verbose")
-
-		if verbose {
-			fmt.Println("Starting server in verbose mode...")
-		}
-
-		fmt.Printf("🚀 Server starting at %s:%d\n", host, port)
-		// เพิ่มโค้ดสำหรับ start server ของคุณที่นี่
-	},
-}
-
-// EncryptCmd สำหรับ encryption (ตัวอย่าง)
-var EncryptCmd = &cobra.Command{
-	Use:   "encrypt [file]",
-	Short: "Encrypt a file",
-	Long:  `Encrypt a file using AWE encryption algorithm`,
-	Args:  cobra.MinimumNArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		filename := args[0]
-		output, _ := cmd.Flags().GetString("output")
-
-		fmt.Printf("🔐 Encrypting file: %s\n", filename)
-		if output != "" {
-			fmt.Printf("📝 Output: %s\n", output)
-		}
-		// เพิ่มโค้ด encryption logic ที่นี่
-	},
-}
-
-// DecryptCmd สำหรับ decryption (ตัวอย่าง)
+// DecryptCmd สำหรับ decryption
 var DecryptCmd = &cobra.Command{
 	Use:   "decrypt [file]",
 	Short: "Decrypt a file",
@@ -66,11 +29,29 @@ var DecryptCmd = &cobra.Command{
 		filename := args[0]
 		output, _ := cmd.Flags().GetString("output")
 
-		fmt.Printf("🔓 Decrypting file: %s\n", filename)
+		fmt.Printf("Decrypting file: %s\n", filename)
 		if output != "" {
-			fmt.Printf("📝 Output: %s\n", output)
+			fmt.Printf("Output: %s\n", output)
 		}
 		// เพิ่มโค้ด decryption logic ที่นี่
+	},
+}
+
+// EncryptCmd สำหรับ encryption
+var EncryptCmd = &cobra.Command{
+	Use:   "encrypt [file]",
+	Short: "Encrypt a file",
+	Long:  `Encrypt a file using AWE encryption algorithm`,
+	Args:  cobra.MinimumNArgs(1),
+	Run: func(cmd *cobra.Command, args []string) {
+		filename := args[0]
+		output, _ := cmd.Flags().GetString("output")
+
+		fmt.Printf("Encrypting file: %s\n", filename)
+		if output != "" {
+			fmt.Printf("Output: %s\n", output)
+		}
+		// เพิ่มโค้ด encryption logic ที่นี่
 	},
 }
 
@@ -94,17 +75,11 @@ Global Flags:
 Use "{{.CommandPath}} [command] --help" for more information about a command{{end}}
 `)
 
-	// Flags สำหรับ start command
-	StartCmd.Flags().IntP("port", "p", 8080, "Port to start server on")
-	StartCmd.Flags().StringP("host", "H", "localhost", "Host address")
-	StartCmd.Flags().BoolP("verbose", "v", false, "Enable verbose output")
-
 	// Flags สำหรับ encrypt/decrypt commands
 	EncryptCmd.Flags().StringP("output", "o", "", "Output file path")
 	DecryptCmd.Flags().StringP("output", "o", "", "Output file path")
 
 	// เพิ่ม subcommands เข้าไปใน root command
-	RootCmd.AddCommand(StartCmd)
 	RootCmd.AddCommand(EncryptCmd)
 	RootCmd.AddCommand(DecryptCmd)
 
