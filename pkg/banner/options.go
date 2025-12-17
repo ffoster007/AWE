@@ -31,13 +31,13 @@ func init() {
 	RootCmd.SetHelpCommand(&cobra.Command{Hidden: true})
 
 	// กำหนด Usage Template แบบกำหนดเอง
-	RootCmd.SetUsageTemplate(`AWE is a encryption tool used for security testing developed by AVACX.
+	RootCmd.SetUsageTemplate(`  
 Usage:
 	awe [flags]
 
 Flags:
 STARTS:
-	-i,  --init			Create an AWE repository or start a new one from an existing one.
+        -i,  --init			Create an AWE repository or start a new one from an existing one.
 	-c,  --connect [values]		Connect to your SCA (Security Code Access) key
 	-cv, --change-vault		For switching to a new/other SCA code.
 	-cc, --cancel-connect		For unlinking the code
@@ -144,7 +144,7 @@ OTHERS:
 
 		// OTHERS
 		if update || updateShort {
-			fmt.Println("Checking for updates...")
+			fmt.Println("⬆Checking for updates...")
 			fmt.Printf("Current version: %s\n", Version)
 			fmt.Println("You are using the latest version!")
 			os.Exit(0)
