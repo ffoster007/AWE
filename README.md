@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#" target="_blank" rel="noopener">
-    <img src="./static/123.png" alt="avacx" />
+    <img src="./static/AWE.png" alt="avacx" />
   </a>
 </p>
 
